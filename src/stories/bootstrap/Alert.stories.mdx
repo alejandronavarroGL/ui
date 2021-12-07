@@ -1,0 +1,71 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { BootstrapVariants } from '../../defaults'
+import { action } from '@storybook/addon-actions'
+import { AlertMessageComponent } from '../../index'
+import { ref } from 'vue'
+
+import Overview from '../../docs/overview.md'
+
+<Meta title="MDX/Alert Messages" component={AlertMessageComponent} />
+
+export const Template = (args) => ({
+  components: { AlertMessageComponent },
+  setup() {
+    const toggle = ref(true)
+    return { args, toggle }
+  },
+  methods: {
+    show: action('show'),
+    hide: action('hide'),
+    close: action('close'),
+  },
+  template: `
+    <a href="" @click.prevent="toggle=!toggle">Toggle visible</a>
+    <br>
+    <alert-message-component :="args" :show="toggle" @show="show" @close="close" @hide="hide">{{ args.default }}</alert-message-component>
+  `,
+})
+
+# Alert 🚨
+
+Alert users to important information.
+
+```javascript
+function() {
+  // some code...
+  let = 'foo'
+  const = 'bar'
+}
+```
+
+<Overview/>
+
+### This is a story imported by story id
+<Story id="ui-bootstrap-alert--inverted" />
+
+<Story 
+  name="Alert Primary" 
+  args={{
+    default: 'primary alert',
+    animate: false,
+    dismissible: false,
+    show: true,
+    variant: BootstrapVariants.Primary,
+  }} 
+>
+  {Template.bind({})}
+</Story>
+
+<Story 
+  name="Alert Secondary" 
+  args={{
+    default: 'seconday alert',
+    animate: false,
+    dismissible: false,
+    show: true,
+    variant: BootstrapVariants.Secondary,
+  }} 
+>
+  {Template.bind({})}
+</Story>
+

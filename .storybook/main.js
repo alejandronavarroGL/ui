@@ -1,12 +1,18 @@
 module.exports = {
   stories: [
-    "../src/stories/bootstrap/*.stories.mdx",
-    "../src/stories/bootstrap/*.stories.@(js|jsx|ts|tsx)"
+    '../src/stories/bootstrap/*.stories.mdx',
+    '../src/stories/bootstrap/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-actions",
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-actions',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        transcludeMarkdown: true,
+      },
+    },
     '@whitespace/storybook-addon-html',
   ],
   typescript: {
@@ -15,7 +21,8 @@ module.exports = {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      propFilter: prop =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
 }
